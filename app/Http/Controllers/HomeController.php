@@ -47,4 +47,10 @@ class HomeController extends Controller
     {
         return view('middleware');
     }
+    public function showuser()
+    {
+        $data = DB::select('select * from users');
+
+        return view('users', compact('data'));
+    }
 }

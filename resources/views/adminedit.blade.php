@@ -21,9 +21,9 @@
 
 <center>
 
-	@foreach($data as $r)
-    <div class="col-md-8">
-    <form action="/update" method = "POST" >
+@foreach($data as $r)
+<div class="col-md-8">
+<form action="/update" method = "POST" >
 <input type="hidden" name="id" value="{{$r->id}}">
 @csrf
 <div class="form-group" style = "text-align: left;">

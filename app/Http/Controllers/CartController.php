@@ -52,8 +52,11 @@ class CartController extends Controller
         
         if(Auth::user()->type=="member")
         {
+            if(DB::table('carts')->where('product_id',$request->id)->get()->count()==0)
+            {
         DB::table('carts')->insert([
             'userid' => $request->userid,
+            'img'   =>  $request->img,
             'product_id' => $request->id,
             'product_name' => $request->name,
             'type' => $request->type,
@@ -62,10 +65,33 @@ class CartController extends Controller
             'qty' => $request->qty,
             'subtotal' => $request->price*$request->qty
                 ]);
+
+                $st = DB::table('products')->where('id', $request->id)->first();
+                
+                $s=$st->stock-$request->qty;
+            DB::table('products')
+                ->where('id', $request->id) 
+                ->update(['stock' => $s]);
     
-            echo '<script>alert("Item Added to Cart")</script>';
+    
             
+                echo '<script>alert("Item Added to Cart")</script>';
             return redirect('/menu');
+            
+        }
+        else
+        {
+
+            $ct = DB::table('carts')->where('product_id', $request->id)->first();
+
+            $c=$ct->qty + $request->qty;
+            
+            
+            DB::table('carts')
+            ->where('product_id', $request->id) 
+            ->update(['qty' => $c]);
+            echo '<script>alert("Item already added")</script>'; 
+        }
         }   
     
     }
@@ -115,6 +141,14 @@ class CartController extends Controller
         if(Auth::user()->type=="member")
         {
         $id=$_POST['id'];
+
+        $st = DB::table('carts')->where('id', $id)->first();
+        $pd = DB::table('products')->where('id', $st->product_id)->first();
+        $s=$pd->stock+$st->qty;
+        DB::table('products')
+            ->where('id', $pd->id) 
+            ->update(['stock' => $s]);
+
         Cart::where('id','=',$id)->delete();
         $uid=$_POST['uid'];
         echo "<script>alert('Item Deleted from Cart');

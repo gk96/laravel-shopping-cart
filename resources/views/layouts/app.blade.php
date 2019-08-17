@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top ">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -51,10 +51,30 @@
                             @endif
                         @else
 
+
                         <li class="nav-item">
-                                <!-- <a class="nav-link" href="{{ url('/shoppingcart') }}" style="border-right: solid 1px black;">Shopping Cart</a> -->
-                                <a href="/mycart/{{Auth::user()->id}}" class = "nav-link">My Cart</a>
+                            <form action="/search"> 
+                                        
+                            <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                            <div class="input-group">
+                            <input class="form-control" type="search" name="search1" placeholder="Search Products">
+                            &emsp;&emsp;
+                            <div class="input-group-append">
+                            <button class="form-control" type="submit" class="btn btn-success" value="search"><i class="fa fa-search"></i></button>
+                            </div></div>
+                            </div>
                             </li>
+                        <li class="nav-item">
+                                
+                                <a href="/mycart/{{Auth::user()->id}}" class = "nav-link">My Cart</a>
+                            
+                             <li><a href="">{{ Illuminate\Support\Facades\DB::table('carts')->count() }}</a></li>
+                            
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/menu') }}" class="nav-link">Menu</a>
+                            </li>
+                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

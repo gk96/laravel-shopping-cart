@@ -28,6 +28,8 @@ Route::get('/mycart/{userid}', 'CartController@index')->name('mycart');
 
 Route::any('/checkout','OrderController@create');
 
+Route::get('/search','ProductController@searchprod' );
+
 Route::any('/confirm','OrderController@store')->name('confirm');
 Route::any('/myorders','OrderController@show');
 //admin routes
@@ -36,6 +38,7 @@ Route::any('/prodel','ProductController@destroy');
 Route::any('/proedit','ProductController@showone');
 
 Route::get('/orders','ProductController@showorders');
+Route::get('/users','HomeController@showuser');
 Route::get('/test',function(){
     return view('test');
 });

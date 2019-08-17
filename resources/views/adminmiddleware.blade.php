@@ -81,8 +81,9 @@
             @endif  
             <center>
          <div class = "col-md-12">
-        <div class="btn" style="margin-top: 20px;text-align: right;"> <a href= "/adminadd" >Add Products</a></div>
-        <!-- <div class="btn" style="margin-top: 20px;text-align: right;"> <a href= "/orders" >Order Table</a></div> -->
+        
+        
+
 <table class = "table table-hover">
 <thead>
 <th scope = "col">Image</th>

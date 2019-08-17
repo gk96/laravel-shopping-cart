@@ -9,13 +9,14 @@
 
 @extends('layouts.app')
 @section('content')
+<br>
 <div class="container-fixed">
 <div class="row" style = "margin-left:20px;"> 
 @foreach($data as $result)
 <div class="card col-md-3" style = "margin-top: 30px;">
 <div class="card-body">
-<h6 class="card-subtitle text-muted">{{$result->name}}</h6>
-<h5 class="card-title">{{$result->type}}</h5>
+<h5 class="card-title">{{$result->name}}</h5>
+<h6 class="card-subtitle text-muted">{{$result->type}}</h6>
 </div>
 <center>
 <img style = "width: 220px; height: 300px;" src="{{ $result->img }}" alt = "watch">

@@ -55,6 +55,22 @@ class ProductController extends Controller
         return view('adminmiddleware');
     }
 
+    public function searchprod(Request $request) 
+    { $s=$request->input('search1'); 
+        //return $s; 
+        //echo "".$s; 
+        $data=Product::where('name','LIKE','%'.$s.'%')->get(); 
+        //echo "".$data2;
+         if(count($data)==0) 
+         { 
+             return redirect()->back()->with('alert', 'product not available ');
+             }
+          else 
+          { return view('menu',compact('data')); 
+            // return view('search',compact('result','r')); 
+          } 
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -83,7 +99,11 @@ class ProductController extends Controller
     {
         $data1 = DB::select('select * from orders');
         $data2 = DB::select('select * from orderdetails');
-        return view('orders', compact('data1',data2));
+        $data3 = DB::table('orders')
+            ->join('orderdetails', 'orders.id', '=', 'orderdetails.orderid')
+            ->select('orders.cname','orders.email','orders.addr','orders.status' ,'orderdetails.*')
+            ->get();
+        return view('orders', compact('data3'));
     }
 
     /**

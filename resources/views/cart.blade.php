@@ -10,13 +10,26 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ url('/menu') }}">Back To Menu</a>
+
 <center>
+  <?php
+  if(count($myitems)==0)
+  {
+  ?>
+  <h3>Cart is Empty</h3>
+  <img style = "width: 320px; height: 300px;" src="/images/cartempty.jpg">
+  <br><br>
+  <a href="{{ url('/menu') }}" class="btn-success" >Continue Shopping</a> 
+  <?php }
+  else
+  {
+    ?>
 <h3>My Cart</h3>
 <div class = "col-md-8">
 
 <table class = "table table-hover">
 <thead>
+<th scope = "col"></th>
 <th scope = "col">Product Name</th>
 <th scope = "col">Product Type</th>
 <th scope = "col">Description</th>
@@ -30,6 +43,7 @@
 foreach($myitems as $result) {?>
 
 <tr class="table-secondary">
+<td><img src="{{ URL::to('/') }}/{{ $result->img }}" class="img-thumbnail" width="75" /></td>
 <td><?php echo $result->product_name?></td>
 <td><?php echo $result->type?></td>
 <td><?php echo $result->description?></td>
@@ -38,7 +52,7 @@ foreach($myitems as $result) {?>
 <td><?php echo $result->subtotal?></td>
 <td>
 <form action="\deletecart" method="POST">
-<input type="submit" name="btn" value="Delete" class="btn-danger" >
+<input type="submit" name="btn" value="Remove" class="btn-danger" >
 @csrf
 <input type="hidden" name="id" value="{{$result->id}}">
 <input type="hidden" name="uid" value="{{$result->userid}}">
@@ -62,9 +76,12 @@ $total = $total+$result->subtotal;
 @csrf
 <input type="hidden" name="id" value="{{ Auth::user()->id }}">
 </form>
-
-<a href="{{ url('/menu') }}" class="btn-sucess" >Continue Shopping</a>
+<br><br>
+<a href="{{ url('/menu') }}" class="btn-success" >Continue Shopping</a>
 
 </div> 
+<?php
+  } 
+?>
 </center>
   @endsection

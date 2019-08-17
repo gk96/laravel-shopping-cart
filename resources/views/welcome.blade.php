@@ -105,7 +105,7 @@
 
                 <div class="links">
                     <a href="/menu">Menu</a>
-                    <a href="/contact">Contact Us</a>
+                    <!-- <a href="/contact">Contact Us</a> -->
                     <a href="/test">Testimonials</a>
                     <!-- <a href="#">Offers</a> -->
                     <!-- <a href="#">Forge</a>
