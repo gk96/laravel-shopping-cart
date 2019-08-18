@@ -18,3 +18,4 @@ Password : password
 User: gauthamk1111@gmail.com  
 Password: 12345678  
 
+For Mail setup please enable 2 step verification in gmail settings and generate app password and paste it in the .env file smtp password and username.
